@@ -1,4 +1,4 @@
-# Meet-App📍
+# MeetUp-App📍
 
 Meet and connect with people who share the same interest
 
