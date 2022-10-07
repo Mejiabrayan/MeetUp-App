@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Test Auth Server</title>
+  </head>
+
+  <body>
+    <style>
+      #container {
+        max-width: 500px;
+      }
+      h4 {
+        margin-top: 25px;
+      }
+    </style>
+
+    <main id="container">
+      <h1>OAuth2 Test</h1>
+      <h4><b>Step 1:</b> Get the OAuth URL</h4>
+      <p>Click the button below to get your OAuth URL.</p>
+      <button id="getURL">Get OAuth URL</button>
+      <p id="result"></p>
+      <a id="authURL" href target="_blank">Click to authorize</a>
+
+      <h4>Step 2: Get your code and exchange for an access token</h4>
+      <p>
+        After you are redirected back to your Meet app on GitHub, copy the code
+        from the URI.
+      </p>
+      <br />
+      <label
+        >Code input
+        <input id="code" type="text" value="" />
+      </label>
+      <button id="getToken">Get Token</button>
+      <p id="accessToken"></p>
+      <h4>Step 3: Get the calendar events using your access token</h4>
+      <button id="getEvents">Get Events</button>
+      <p id="events"></p>
+    </main>
+    <script type="text/javascript">
+      // Step 1: Get the OAuth URL
+      const getURLElement = document.getElementById('getURL');
+      const resultElement = document.getElementById('result');
+      const resultLink = document.getElementById('authURL');
+      const getAuthURL =
+        'https://u44bq09nx2.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url';
+
+      getURLElement.onclick = function () {
+        fetch(getAuthURL)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (json) {
+            const result = JSON.stringify(json);
+            const { authUrl } = JSON.parse(result);
+            resultElement.innerText = result;
+            resultLink.href = authUrl;
+          });
+      };
+      // Step 2: Get the access token
+      const codeValue = document.getElementById('code');
+      const getAccessToken = document.getElementById('getToken');
+      const accessTokenElement = document.getElementById('accessToken');
+      const getToken =
+        'https://u44bq09nx2.execute-api.eu-central-1.amazonaws.com/dev/api/token';
+
+      getAccessToken.onclick = function () {
+        let code = codeValue.value;
+
+        if (decodeURIComponent(code) === code) {
+          code = encodeURIComponent(codeValue.value);
+        }
+        const getTokenRequest = getToken + '/' + code;
+        fetch(getTokenRequest)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (json) {
+            accessTokenElement.innerText = JSON.stringify(json);
+          });
+      };
+
+      //   Step 3: Get the calendar events using your access token
+      const getEvents = document.getElementById('getEvents');
+      const events = document.getElementById('events');
+      const getCalendarEvents =
+        'https://u44bq09nx2.execute-api.eu-central-1.amazonaws.com/dev/api/get-events';
+
+      getEvents.onclick = function () {
+        const { access_token } = JSON.parse(accessTokenElement.innerText);
+        const eventRequest = getCalendarEvents + '/' + access_token;
+        fetch(eventRequest)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (json) {
+            events.innerText = JSON.stringify(json, null, 2);
+          });
+      };
+    </script>
+  </body>
+</html>
