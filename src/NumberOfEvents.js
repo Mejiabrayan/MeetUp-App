@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+// The code is a component that displays the number of events in an input field.
 class NumberOfEvents extends Component {
     handleInputChanged = (event) => {
         const value = event.target.value;
