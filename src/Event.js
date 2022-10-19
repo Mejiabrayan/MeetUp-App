@@ -14,12 +14,9 @@ class Event extends Component {
 
         return <div className='Event'>
             <h1 className='event-summary'>{event.summary}</h1>
-            <div className='event-info'>
-                <p className='event-creator'>{event.creator}</p>
-                <p className='event-date'>{event.dateTime}</p>
-                <p className='event-time-zone'>{event.timeZone}</p>
-                <p className='event-location'>{event.location}</p>
-            </div>
+            <p className="event-info">
+                {event.start.dateTime} {event.start.timeZone} {event.location}
+            </p>
             {this.state.show && (
                 <div>
                     <h2 className='event-title'>Event Details</h2>
