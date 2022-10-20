@@ -8,7 +8,7 @@ describe('<Event /> component', () => {
     let event, EventWrapper;
     beforeAll(() => {
         event = mockData[0];
-        EventWrapper = shallow(<Event event={event} />);
+        EventWrapper = shallow(<Event event={mockData[0]} />);
     });
 
     test('render event summary correctly', () => {
@@ -46,5 +46,9 @@ describe('<Event /> component', () => {
         })
         expect(EventWrapper.find('.event-description')).toHaveLength(0)
     })
-
+    test('render event of mock event data correctly', () => {
+        expect(EventWrapper.find('.event-info').text()).toBe(
+            `${event.start.dateTime} ${event.start.timeZone} ${event.location}`
+        )
+    })
 })
