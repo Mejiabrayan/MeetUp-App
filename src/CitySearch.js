@@ -1,46 +1,51 @@
 import React, { Component } from 'react';
 
-class CitySearch extends Component {
+export class CitySearch extends Component {
     state = {
         query: '',
         suggestions: []
     }
     handleInputChanged = (event) => {
         const value = event.target.value;
-        // passing it through the app
         const suggestions = this.props.locations.filter((location) => {
             return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
-        })
-        this.setState({ query: value, suggestions })
-    }
-
+        });
+        this.setState({
+            query: value,
+            suggestions,
+        });
+    };
     handleItemClicked = (suggestion) => {
         this.setState({
             query: suggestion
-        })
+        });
     }
+
+
     render() {
         return (
-            //  takes the value from the input and updates the state of query based on that value
             <div className='CitySearch'>
                 <input
-                    type="text"
-                    className="city"
+                    placeholder='Search for city'
+                    type='text'
+                    className='city'
                     value={this.state.query}
                     onChange={this.handleInputChanged}
                 />
-
-                <ul className="suggestions">
+                <ul className='suggestions'>
                     {this.state.suggestions.map((suggestion) => (
-                        <li key={suggestion}
-                        onClick={() => this.handleItemClicked(suggestion)}>{suggestion}</li>
+                        <li
+                            key={suggestion}
+                            onClick={() => this.handleItemClicked(suggestion)}
+                        >{suggestion}
+                        </li>
                     ))}
-                    <li key="all">
+                    <li key='all'>
                         <b>See all cities</b>
                     </li>
                 </ul>
             </div>
-        )
+        );
     }
 }
 export default CitySearch;
