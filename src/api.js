@@ -1,3 +1,4 @@
+import { mockData } from './mock-data';
 // used to store function extractLocations which extracts event locations out of an array of events and remove duplicates
 /**
  *
@@ -12,3 +13,7 @@ export const extractLocations = (events) => {
   var locations = [...new Set(extractLocations)];
   return locations;
 };
+
+export const getEvents = async () => {
+  return mockData;
+}
