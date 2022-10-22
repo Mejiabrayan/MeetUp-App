@@ -4,7 +4,7 @@ import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { mockData } from './mock-data';
-import { extractLocations } from './api'
+import { extractLocations, getEvents } from './api'
 
 class App extends Component {
   state = {
@@ -19,13 +19,26 @@ class App extends Component {
       totalEvents: value
     })
   }
+  // updates the state of events
+  updateEvents = (location) => {
+    getEvents().then((events) => {
+      const locationEvents = (location === 'all') ?
+        events :
+        events.filter((event) => event.location === location);
+      this.setState({
+        events: locationEvents
+      });
+    });
+  }
+
+
   render() {
     const { events, locations, totalEvents } = this.state;
     return (
       <div className="App">
         <h1> MeetUp 📍 </h1>
         <h3> Find events near you </h3>
-        <CitySearch locations={locations} />
+        <CitySearch locations={locations} updateEvents={this.updateEvents} />
         <NumberOfEvents totalEvents={totalEvents} handleInputChanged={this.handleInputChanged} />
         <EventList events={events.slice(0, totalEvents)} />
       </div>
