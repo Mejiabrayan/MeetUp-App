@@ -11,15 +11,4 @@ describe('<NumberOfEvents /> component', () => {
         expect(NumberEventWrapper.find('.input-number')).toHaveLength(1)
     })
 
-    test('render default number in the input is 32', () => {
-        expect(NumberEventWrapper.find('.input-number').prop('value')).toBe(32)
-    })
-    test('render state when input changes', () => {
-        NumberEventWrapper.setState({
-            totalEvents: 32
-        })
-        const eventObject = { target: { value: 8 } }
-        NumberEventWrapper.find('.input-number').simulate('change', eventObject);
-        expect(NumberEventWrapper.state('totalEvents')).toBe(8)
-    })
 })
