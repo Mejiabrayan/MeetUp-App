@@ -13,20 +13,22 @@ class App extends Component {
     totalEvents: 32,
   }
 
+  // Update events based on city selected by user
   handleInputChanged = (e) => {
     const value = e.target.value;
     this.setState({
       totalEvents: value
     })
   }
-  // updates the state of events
-  updateEvents = (location) => {
+
+  // 
+  updateEvents = (location, eventCount = this.state.totalEvents) => {
     getEvents().then((events) => {
       const locationEvents = (location === 'all') ?
         events :
         events.filter((event) => event.location === location);
       this.setState({
-        events: locationEvents
+        events: locationEvents.slice(0, eventCount)
       });
     });
   }
@@ -44,7 +46,7 @@ class App extends Component {
     this.mounted = false;
   }
   render() {
-    const {events, locations, totalEvents} = this.state;
+    const { events, locations, totalEvents } = this.state;
     return (
       <div className="App">
         <h1> MeetUp 📍 </h1>
