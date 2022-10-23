@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 export class CitySearch extends Component {
     state = {
         query: '',
-        suggestions: []
+        suggestions: [],
+        showSuggestions: undefined
     }
     handleInputChanged = (event) => {
         const value = event.target.value;
@@ -14,10 +15,12 @@ export class CitySearch extends Component {
             query: value,
             suggestions,
         });
+        console.log(suggestions)
     };
     handleItemClicked = (suggestion) => {
         this.setState({
-            query: suggestion
+            query: suggestion,
+            showSuggestions: false
         });
         this.props.updateEvents(suggestion);
     }
@@ -32,8 +35,11 @@ export class CitySearch extends Component {
                     className='city'
                     value={this.state.query}
                     onChange={this.handleInputChanged}
+                    onFocus={() => { this.setState({ showSuggestions: true }) }}
                 />
-                <ul className='suggestions'>
+                <ul className='suggestions' style={this.state.showSuggestions ? {} : {
+                    display: 'none'
+                }}>
                     {this.state.suggestions.map((suggestion) => (
                         <li
                             key={suggestion}
