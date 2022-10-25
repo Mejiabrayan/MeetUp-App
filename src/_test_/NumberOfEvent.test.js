@@ -10,9 +10,4 @@ describe('<NumberOfEvents /> component', () => {
     test('render input element', () => {
         expect(NumberEventWrapper.find('.input-number')).toHaveLength(1)
     })
-<<<<<<< HEAD
-   
-=======
-
->>>>>>> integrationTest
 })
