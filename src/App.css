@@ -1,4 +1,11 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:500);
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
 .App {
   text-align: center;
   padding: 2% 5%;
@@ -24,8 +31,8 @@ p {
   display: block;
 }
 
-input[type="text"],
-input[type="number"] {
+input[type='text'],
+input[type='number'] {
   padding: 8px 6px 8px 10px;
   border-radius: 4px;
   outline: none;
@@ -125,7 +132,7 @@ input[type="number"] {
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 20px;
   padding: 20px;
-  font-family: sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .Alert {
@@ -195,10 +202,16 @@ input[type="number"] {
   color: #fff;
   font-size: 14px;
   letter-spacing: 0.2px;
-  font-family: "Roboto";
+  font-family: 'Poppins', sans-serif;
 }
 
+.Event {
+  border: rgba(133, 133, 133, 0.25) solid 1px;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
 
+}
 
 @media only screen and (min-width: 992px) {
   .data-vis-wrapper {
