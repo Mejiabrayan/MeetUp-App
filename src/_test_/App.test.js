@@ -65,4 +65,12 @@ describe('<App /> integration', () => {
         expect(AppWrapper.state('events')).toEqual(allEvents);
         AppWrapper.unmount();
     })
+    test('EventList updates when new length is specified in NumberOfEvents', () => {
+        const AppWrapper = mount(<App />);
+        const NumberOfEventsWrapper = AppWrapper.find('NumberOfEvents');
+        const EventListWrapper = AppWrapper.find('EventList');
+        NumberOfEventsWrapper.simulate('change', {target: {value: 10}})
+        expect(EventListWrapper.prop('events').length).toBeLessThanOrEqual(NumberOfEventsWrapper.prop('totalEvents'));
+        AppWrapper.unmount();
+    })
 });
