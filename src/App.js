@@ -53,7 +53,7 @@ class App extends Component {
         <h3> Find events near you </h3>
         <CitySearch locations={locations} updateEvents={this.updateEvents} />
         <NumberOfEvents totalEvents={totalEvents} handleInputChanged={this.handleInputChanged} />
-        <EventList events={events} />
+        <EventList events={events.slice(0, totalEvents)} />
       </div>
     );
   }
