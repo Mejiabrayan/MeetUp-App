@@ -1,0 +1,12 @@
+
+/* Hidden by Default */
+.show-details-btn,
+.hide-details-btn,
+.event-details-inner-container {
+  display: none;
+}
+
+/* Visible Class */
+.visible {
+  display: block;
+}
