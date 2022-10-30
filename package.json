@@ -8,9 +8,11 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
+    "bootstrap": "^5.2.2",
     "googleapis": "^59.0.0",
     "nprogress": "^0.2.0",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4",
@@ -56,6 +58,8 @@
   "devDependencies": {
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.7",
     "enzyme": "^3.11.0",
-    "gh-pages": "^4.0.0"
+    "gh-pages": "^4.0.0",
+    "jest-cucumber": "^3.0.1",
+    "puppeteer": "^18.1.0"
   }
 }
