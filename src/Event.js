@@ -1,45 +1,35 @@
 import React, { Component } from 'react';
+import './Event.css'
 
-class Event extends Component {
-    // the default state
-    state = { show: false }
-    // set the state to do not show details
-    clickEventDetails = () => {
-        if (!this.state.show) {
-            this.setState({
-                show: true,
-            })
-        } else {
-            this.setState({
-                show: false,
-            })
+
+export class Event extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showDetails: false,
         }
-    };
+    }
+    clickEventDetails = () => {
+        this.setState({ showDetails: !this.state.showDetails })
+    }
 
     render() {
+        const showDetails = this.state.showDetails;
         const { event } = this.props; // our event property
 
         return (
-            <div className='Event'>
+            <div className='event event-details-outer-container'>
                 <h2 className='event-summary'>{event.summary}</h2>
-                <p className='event-info'>
-                    {event.start.dateTime} {event.start.timeZone} {event.location}
-                </p>
-                {this.state.show ? (
-                    <>
-                        <div className='details'>
-                            <h3 className='details-title'>About Event</h3>
-                            <a href={event.htmlLink} className='details-link'>
-                                See details on Google Calendar
-                            </a>
-                            <p className='event-description'>{event.description}</p>
-                        </div>
-                        <button className='hide-details-btn' onClick={this.clickEventDetails}>Hide Details</button>
-                    </>
-                ) : (
-                    <button className='show-details-btn' onClick={this.clickEventDetails}>Show Details</button>
-
-                )}
+                <p>{event.description}</p>
+                <p className='event-location'>Location: {event.location}</p>
+                <button className='details-toggle' onClick={this.clickEventDetails}>
+                    <span className={showDetails ? 'show-details-btn' : 'show-details-btn visible'}> show details </span>
+                    <span className={showDetails ? 'hide-details-btn visible' : 'show-details-btn'}> hide details </span>
+                </button>
+                <div className={showDetails ? 'event-details-inner-container visible' : 'event-details-inner-container'}>
+                    <p className='event-start'>From: {event.start.dateTime}</p>
+                    <p className='event-end'>Until: {event.end.dateTime}</p>
+                </div>
             </div>
         )
     }
