@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
+
 export class CitySearch extends Component {
+
     state = {
         query: '',
         suggestions: [],
