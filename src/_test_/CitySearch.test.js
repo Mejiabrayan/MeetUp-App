@@ -11,17 +11,12 @@ describe('<CitySearch /> component', () => {
     CitySearchWrapper = shallow(<CitySearch locations={locations} updateEvents={() => { }} />);
   });
 
-  test('renders text input', () => {
+  test('renders city search input', () => {
     expect(CitySearchWrapper.find('.city')).toHaveLength(1);
   });
 
   test('renders list of suggestions', () => {
     expect(CitySearchWrapper.find('.suggestions')).toHaveLength(1);
-  });
-
-  test('renders text input correctly', () => {
-    const query = CitySearchWrapper.state('query');
-    expect(CitySearchWrapper.find('.city').prop('value')).toBe(query);
   });
 
   test('changes state when text input changes', () => {
