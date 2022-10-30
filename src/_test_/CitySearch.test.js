@@ -8,7 +8,7 @@ describe('<CitySearch /> component', () => {
   let locations, CitySearchWrapper;
   beforeAll(() => {
     locations = extractLocations(mockData)
-    CitySearchWrapper = shallow(<CitySearch locations={locations} updateEvents={() => {}} />);
+    CitySearchWrapper = shallow(<CitySearch locations={locations} updateEvents={() => { }} />);
   });
 
   test('renders text input', () => {
@@ -26,13 +26,13 @@ describe('<CitySearch /> component', () => {
 
   test('changes state when text input changes', () => {
     CitySearchWrapper.setState({ query: 'Munich' });
-    const eventObject = {target: { value: 'Berlin' }};
+    const eventObject = { target: { value: 'Berlin' } };
     CitySearchWrapper.find('.city').simulate('change', eventObject);
     expect(CitySearchWrapper.state('query')).toBe('Berlin')
   });
 
   test('renders list of suggestions correctly', () => {
-    CitySearchWrapper.setState({ suggestions: locations});
+    CitySearchWrapper.setState({ suggestions: locations });
     const suggestions = CitySearchWrapper.state('suggestions');
     expect(CitySearchWrapper.find('.suggestions li')).toHaveLength(suggestions.length + 1);
     for (let i = 0; i < suggestions.length; i += 1) {
@@ -43,7 +43,7 @@ describe('<CitySearch /> component', () => {
   test('suggestion list matches the query when changed', () => {
     CitySearchWrapper.setState({ query: '', suggestions: [] }); // set component state to default values
     CitySearchWrapper.find(".city").simulate("change", { // find nodes with className "city" and simulate a change event
-      target: { value: "Berlin" }, // target the 'value' property and change it to "Berlin"
+      target: { value: 'Berlin' }, // target the 'value' property and change it to "Berlin"
     });
     const query = CitySearchWrapper.state("query"); // Create a variable out of the component's local state value of "query" (which should currently be berlin after a change was simulated)
     const filteredLocations = locations.filter((location) => { // Create a variable that stores a list of filtered locations
@@ -62,7 +62,7 @@ describe('<CitySearch /> component', () => {
   test("selecting CitySearch input reveals the suggestions list", () => {
     CitySearchWrapper.find('.city').simulate('focus');
     expect(CitySearchWrapper.state('showSuggestions')).toBe(true);
-    expect(CitySearchWrapper.find('.suggestions').prop('style')).not.toEqual({display: 'none'});
+    expect(CitySearchWrapper.find('.suggestions').prop('style')).not.toEqual({ display: 'none' });
   });
 
   test("selecting a suggestion hides the suggestions list", () => {
