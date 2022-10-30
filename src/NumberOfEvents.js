@@ -9,7 +9,8 @@ class NumberOfEvents extends Component {
             <div className='numberOfEvents'>
                 <label>
                     Number of Events:
-                    <input className='input-number'
+                    <input
+                        className='input-number'
                         type='number'
                         min='1'
                         value={totalEvents}
