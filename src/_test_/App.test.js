@@ -36,6 +36,7 @@ describe('<App /> integration', () => {
         expect(AppWrapper.find(EventList).props().events).toEqual(AppEventsState);
         AppWrapper.unmount();
     });
+
     test('App passes "locations" state as a prop to CitySearch', () => {
         const AppWrapper = mount(<App />);
         const AppLocationsState = AppWrapper.state('locations');
@@ -43,6 +44,7 @@ describe('<App /> integration', () => {
         expect(AppWrapper.find(CitySearch).props().locations).toEqual(AppLocationsState)
         AppWrapper.unmount()
     })
+
     test('get list of events matching the city selected by the user', async () => {
         const AppWrapper = mount(<App />);
         const CitySearchWrapper = AppWrapper.find(CitySearch);
@@ -65,6 +67,17 @@ describe('<App /> integration', () => {
         expect(AppWrapper.state('events')).toEqual(allEvents);
         AppWrapper.unmount();
     })
+
+    test('EventList length is 32 by default', async () => {
+        const AppWrapper = mount(<App />)
+        const appEventsState = AppWrapper.state('totalEvents');
+        expect(appEventsState).toEqual(32);
+        expect(AppWrapper.find(NumberOfEvents).prop('totalEvents')).toEqual(appEventsState);
+        expect(AppWrapper.find(EventList).prop('events').length).toBeLessThanOrEqual(appEventsState);
+        AppWrapper.unmount();
+        });
+    
+    //
     test('EventList updates when new length is specified in NumberOfEvents', () => {
         const AppWrapper = mount(<App />);
         const NumberOfEventsWrapper = AppWrapper.find('NumberOfEvents');
