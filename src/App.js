@@ -12,15 +12,36 @@ class App extends Component {
     events: mockData,
     locations: extractLocations(mockData),
     totalEvents: 32,
+    errorAlert: '',
+    warningText: ' Limit of 32 events reached'
+
   }
 
   // Update events based on city selected by user
   handleInputChanged = (e) => {
     const value = e.target.value;
-    this.setState({
-      totalEvents: value
-    })
-  }
+    this.setState({ totalEvents: value });
+
+    if (value < 1 || value > 32) {
+      this.setState({
+        errorText: "Not in range (1 to 32)",
+      });
+    } else {
+      this.setState({
+        errorText: "",
+      });
+    }
+
+    if (value === 1 || value === 32) {
+      this.setState({
+        warningText: "Range limit!",
+      });
+    } else {
+      this.setState({
+        warningText: "",
+      });
+    }
+  };
 
   updateEvents = (location, eventCount = this.state.totalEvents) => {
     getEvents().then((events) => {
@@ -52,7 +73,10 @@ class App extends Component {
         <h1> MeetUp 📍 </h1>
         <h3> Find events near you </h3>
         <CitySearch locations={locations} updateEvents={this.updateEvents} />
-        <NumberOfEvents totalEvents={totalEvents} handleInputChanged={this.handleInputChanged} />
+        <NumberOfEvents totalEvents={totalEvents}
+          handleInputChanged={this.handleInputChanged}
+          errorText={this.state.errorText}
+          warningText={this.state.warningText} />
         <EventList events={events.slice(0, totalEvents)} />
       </div>
     );
