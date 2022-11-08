@@ -6,19 +6,22 @@
       "src": "favicon.ico",
       "sizes": "48x48",
       "type": "image/x-icon",
-      "purpose": "maskable"
+      "purpose": "any maskable"
+   
     },
     {
       "src": "meetup-192x192.png",
       "type": "image/png",
       "sizes": "192x192",
-      "purpose": "maskable"
+       "purpose": "any maskable"
+  
     },
     {
       "src": "meetup-512x512.png",
       "type": "image/png",
       "sizes": "512x512",
-      "purpose": "maskable"
+       "purpose": "any maskable"
+     
     }
   ],
   "start_url": ".",
