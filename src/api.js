@@ -34,6 +34,14 @@ const getToken = async (code) => {
 export const getEvents = async () => {
   NProgress.start()
 
+  // !navigator.onLine checks whether the user is offline, but this only works if there’s no internet
+  
+  if (!navigator.onLine) {
+    const data = localStorage.getItem("lastEvents");
+    NProgress.done();
+    return data ? JSON.parse(events).events : [];
+  }
+
   if (window.location.href.startsWith('http://localhost' || 'https://localhost')) {
     // load progress bar finished executed
     NProgress.done()
@@ -50,20 +58,22 @@ export const getEvents = async () => {
       const newurl = window.location.protocol + "//" + window.location.host;
       window.history.pushState("", "", newurl);
     }
+
   }
-  const token = await getAccessToken();
-  if (token) {
-    removeQuery();
-    const url = 'https://u44bq09nx2.execute-api.eu-central-1.amazonaws.com/dev/api/get-events' + '/' + token;
-    const result = await axios.get(url);
-    if (result.data) {
-      let locations = extractLocations(result.data.events);
-      localStorage.setItem('lastEvents', JSON.stringify(result.data));
-      localStorage.setItem('locations', JSON.stringify(locations));
-    }
-    NProgress.done();
-    return result.data.events;
+}
+const token = await getAccessToken();
+if (token) {
+  removeQuery();
+  const url = 'https://u44bq09nx2.execute-api.eu-central-1.amazonaws.com/dev/api/get-events' + '/' + token;
+  const result = await axios.get(url);
+  if (result.data) {
+    let locations = extractLocations(result.data.events);
+    localStorage.setItem('lastEvents', JSON.stringify(result.data));
+    localStorage.setItem('locations', JSON.stringify(locations));
   }
+  NProgress.done();
+  return result.data.events;
+}
 }
 
 export const getAccessToken = async () => {
