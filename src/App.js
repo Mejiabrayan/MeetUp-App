@@ -5,6 +5,7 @@ import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { mockData } from './mock-data';
 import { extractLocations, getEvents } from './api'
+import { WarningAlert } from './Alerts';
 import './nprogress.css';
 
 class App extends Component {
@@ -68,18 +69,36 @@ class App extends Component {
   }
   render() {
     const { events, locations, totalEvents } = this.state;
-    return (
-      <div className="App">
-        <h1> MeetUp 📍 </h1>
-        <h2> Find events near you </h2>
-        <CitySearch locations={locations} updateEvents={this.updateEvents} />
-        <NumberOfEvents totalEvents={totalEvents}
-          handleInputChanged={this.handleInputChanged}
-          errorText={this.state.errorText}
-          warningText={this.state.warningText} />
-        <EventList events={events.slice(0, totalEvents)} />
-      </div>
-    );
+
+    if (!navigator.onLine) {
+      return (
+        <div className="App">
+          <WarningAlert text={`You are currently offline. Please connect to the internet to see the full list of events.`} />
+          <h1> MeetUp 📍 </h1>
+          <h2> Find events near you </h2>
+          <CitySearch locations={locations} updateEvents={this.updateEvents} />
+          <NumberOfEvents totalEvents={totalEvents}
+            handleInputChanged={this.handleInputChanged}
+            errorText={this.state.errorText}
+            warningText={this.state.warningText} />
+          <EventList events={events.slice(0, totalEvents)} />
+        </div>
+      );
+    }
+    else {
+      return (
+        <div className="App">
+          <h1> MeetUp 📍 </h1>
+          <h2> Find events near you </h2>
+          <CitySearch locations={locations} updateEvents={this.updateEvents} />
+          <NumberOfEvents totalEvents={totalEvents}
+            handleInputChanged={this.handleInputChanged}
+            errorText={this.state.errorText}
+            warningText={this.state.warningText} />
+          <EventList events={events.slice(0, totalEvents)} />
+        </div>
+      );
+    }
   }
 }
 
