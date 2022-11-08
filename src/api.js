@@ -1,5 +1,5 @@
 import { mockData } from './mock-data';
-import axios  from 'axios';
+import axios from 'axios';
 import NProgress from 'nprogress';
 
 export const extractLocations = (events) => {
@@ -8,6 +8,7 @@ export const extractLocations = (events) => {
   return locations;
 };
 
+//  Checks for access token - subject to change
 const checkToken = async (accessToken) => {
   const result = await fetch(
     `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`)
@@ -33,7 +34,7 @@ const getToken = async (code) => {
 export const getEvents = async () => {
   NProgress.start()
 
-  if (window.location.href.startsWith('http://localhost')) {
+  if (window.location.href.startsWith('http://localhost' || 'https://localhost')) {
     // load progress bar finished executed
     NProgress.done()
     return mockData;
