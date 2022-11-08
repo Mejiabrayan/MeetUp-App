@@ -17,8 +17,8 @@ class NumberOfEvents extends Component {
                         value={totalEvents}
                         onChange={handleInputChanged}
                     />
-                      <ErrorAlert text={errorText} />
-                <WarningAlert text={warningText} />
+                    <ErrorAlert text={errorText} />
+                    <WarningAlert text={warningText} />
                 </label>
             </div>
         )

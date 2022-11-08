@@ -31,7 +31,7 @@ class App extends Component {
         errorText: "",
       });
     }
-
+    // disable eslint
     if (value === 1 || value === 32) {
       this.setState({
         warningText: "Range limit!",

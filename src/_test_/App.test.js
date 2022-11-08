@@ -36,6 +36,12 @@ describe('<App /> integration', () => {
         expect(AppWrapper.find(EventList).props().events).toEqual(AppEventsState);
         AppWrapper.unmount();
     });
+    test('render NumberOfEvents prop', () => {
+        const AppWrapper = mount(<App />);
+        const AppAlertTextState = AppWrapper.state('infoText');
+        expect(AppWrapper.find(NumberOfEvents).props().infoText).toEqual(AppAlertTextState);
+        AppWrapper.unmount();
+    })
 
     test('App passes "locations" state as a prop to CitySearch', () => {
         const AppWrapper = mount(<App />);
@@ -75,15 +81,16 @@ describe('<App /> integration', () => {
         expect(AppWrapper.find(NumberOfEvents).prop('totalEvents')).toEqual(appEventsState);
         expect(AppWrapper.find(EventList).prop('events').length).toBeLessThanOrEqual(appEventsState);
         AppWrapper.unmount();
-        });
-    
+    });
+
     //
     test('EventList updates when new length is specified in NumberOfEvents', () => {
         const AppWrapper = mount(<App />);
         const NumberOfEventsWrapper = AppWrapper.find('NumberOfEvents');
         const EventListWrapper = AppWrapper.find('EventList');
-        NumberOfEventsWrapper.simulate('change', {target: {value: 10}})
+        NumberOfEventsWrapper.simulate('change', { target: { value: 10 } })
         expect(EventListWrapper.prop('events').length).toBeLessThanOrEqual(NumberOfEventsWrapper.prop('totalEvents'));
         AppWrapper.unmount();
     })
+
 });
