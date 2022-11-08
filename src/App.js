@@ -71,7 +71,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1> MeetUp 📍 </h1>
-        <h3> Find events near you </h3>
+        <h2> Find events near you </h2>
         <CitySearch locations={locations} updateEvents={this.updateEvents} />
         <NumberOfEvents totalEvents={totalEvents}
           handleInputChanged={this.handleInputChanged}
