@@ -1,6 +1,4 @@
-body {
-  color: #fff;
-}
+
 .container {
   text-align: center;
   position: absolute;
@@ -44,6 +42,10 @@ body {
   font-weight: 900;
   font-size: 4rem;
   margin-bottom: 5px;
+}
+
+.welcome-sub-heading, .welcome-heading {
+  color: #fff;
 }
 
 .login-button {
