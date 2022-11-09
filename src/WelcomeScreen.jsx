@@ -28,7 +28,7 @@ function WelcomeScreen(props) {
             </IconContext.Provider>
           </span>
         </h1>
-        <h2>
+        <h2 className='welcome-sub-heading'>
           Log in to see upcoming events around the world for full-stack
           developers 👨🏽‍💻
         </h2>
