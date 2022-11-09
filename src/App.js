@@ -4,8 +4,9 @@ import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { mockData } from './mock-data';
-import { extractLocations, getEvents } from './api'
+import { extractLocations, getEvents, getAccessToken, checkToken } from './api'
 import { WarningAlert } from './Alerts';
+import WelcomeScreen from './WelcomeScreen';
 import './nprogress.css';
 
 class App extends Component {
@@ -14,7 +15,8 @@ class App extends Component {
     locations: extractLocations(mockData),
     totalEvents: 32,
     errorAlert: '',
-    warningText: ' Limit of 32 events reached'
+    warningText: ' Limit of 32 events reached',
+    showWelcomeScreen: undefined
 
   }
 
@@ -55,13 +57,21 @@ class App extends Component {
     });
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.mounted = true;
-    getEvents().then((events) => {
-      if (this.mounted) {
-        this.setState({ events, locations: extractLocations(events) })
-      }
-    })
+    const accessToken = localStorage.getItem('access_token');
+    const isTokenValid = (await checkToken(accessToken)).error ? false :
+      true;
+    const searchParameter = new URLSearchParams(window.location.search)
+    const code = searchParameter.get("code");
+    this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+    if ((code || isTokenValid) && this.mounted) {
+      getEvents().then((events) => {
+        if (this.mounted) {
+          this.setState({ events, locations: extractLocations(events) });
+        }
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -70,11 +80,14 @@ class App extends Component {
   render() {
     const { events, locations, totalEvents } = this.state;
 
+    if (this.state.showWelcomeScreen === undefined) return <div className="App" />
+
+    // Checks if the user is online or offline
     if (!navigator.onLine) {
       return (
         <div className="App">
           <WarningAlert text={`You are currently offline. Please connect to the internet to see the full list of events.`} />
-          <h1> MeetUp 📍 </h1>
+          <h1> MeetUp📍 </h1>
           <h2> Find events near you </h2>
           <CitySearch locations={locations} updateEvents={this.updateEvents} />
           <NumberOfEvents totalEvents={totalEvents}
@@ -82,13 +95,20 @@ class App extends Component {
             errorText={this.state.errorText}
             warningText={this.state.warningText} />
           <EventList events={events.slice(0, totalEvents)} />
+          <WelcomeScreen
+            showWelcomeScreen={this.state.showWelcomeScreen}
+            getAccessToken={() => {
+              getAccessToken();
+            }}
+          />
         </div>
+
       );
     }
     else {
       return (
         <div className="App">
-          <h1> MeetUp 📍 </h1>
+          <h1> MeetUp📍 </h1>
           <h2> Find events near you </h2>
           <CitySearch locations={locations} updateEvents={this.updateEvents} />
           <NumberOfEvents totalEvents={totalEvents}
@@ -96,6 +116,12 @@ class App extends Component {
             errorText={this.state.errorText}
             warningText={this.state.warningText} />
           <EventList events={events.slice(0, totalEvents)} />
+          <WelcomeScreen
+            showWelcomeScreen={this.state.showWelcomeScreen}
+            getAccessToken={() => {
+              getAccessToken();
+            }}
+          />
         </div>
       );
     }
