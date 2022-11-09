@@ -10,12 +10,15 @@
     "atatus-spa": "^4.5.0",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.2",
+    "bootstrap-icons": "^1.9.1",
     "googleapis": "^59.0.0",
     "nprogress": "^0.2.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.6.0",
     "react-scripts": "5.0.1",
+    "uninstall": "^0.0.0",
     "web-vitals": "^2.1.4",
     "workbox-background-sync": "^6.5.4",
     "workbox-broadcast-update": "^6.5.4",
@@ -51,8 +54,8 @@
       "not op_mini all"
     ],
     "development": [
-      "last 1 chrome version",
       "last 1 firefox version",
+      "last 1 chrome version",
       "last 1 safari version"
     ]
   },
