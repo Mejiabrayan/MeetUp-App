@@ -8,17 +8,18 @@ export const extractLocations = (events) => {
   return locations;
 };
 
-const checkToken = async (accessToken) => {
+export const checkToken = async (accessToken) => {
   const result = await fetch(
     `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`)
     .then((res) => res.json())
     .catch((error) => error.json());
   return result;
-}
+};
 
 const getToken = async (code) => {
   const encodeCode = encodeURIComponent(code);
   const { access_token } = await fetch(
+    // eslint-disable-next-line no-useless-concat
     'https://u44bq09nx2.execute-api.eu-central-1.amazonaws.com/dev/api/token' + '/' + encodeCode)
     .then((res) => {
       return res.json()
@@ -28,7 +29,6 @@ const getToken = async (code) => {
 
   return access_token;
 }
-
 
 export const getEvents = async () => {
   NProgress.start()
@@ -45,8 +45,6 @@ export const getEvents = async () => {
     return data ? JSON.parse(data).events : [];
   }
 
-  // !navigator.onLine checks whether the user is offline, but this only works if there’s no internet
-
 
   const removeQuery = () => {
     if (window.history.pushState && window.location.pathname) {
@@ -62,6 +60,7 @@ export const getEvents = async () => {
   const token = await getAccessToken();
   if (token) {
     removeQuery();
+    // eslint-disable-next-line no-useless-concat
     const url = 'https://u44bq09nx2.execute-api.eu-central-1.amazonaws.com/dev/api/get-events' + '/' + token;
     const result = await axios.get(url);
     if (result.data) {
@@ -94,6 +93,6 @@ export const getAccessToken = async () => {
   return accessToken
 }
 
-// takes accessToken and checks whether it's valid  or o
+
 
 
