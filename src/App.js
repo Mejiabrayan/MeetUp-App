@@ -181,13 +181,13 @@ class App extends Component {
             </div>
 
             <EventList events={events.slice(0, totalEvents)} />
-            {/* <WelcomeScreen
+            <WelcomeScreen
             showWelcomeScreen={this.state.showWelcomeScreen}
             getAccessToken={() => {
               getAccessToken();
             }}
           />
-         */}
+        
 
           </div>
         </>
