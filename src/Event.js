@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import './Event.css'
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+
 
 
 export class Event extends Component {
@@ -18,19 +21,21 @@ export class Event extends Component {
         const { event } = this.props; // our event property
 
         return (
-            <div className='event event-details-outer-container'>
-                <h2 className='event-summary'>{event.summary}</h2>
-                <p>{event.description}</p>
-                <p className='event-location'>Location: {event.location}</p>
-                <button className='details-toggle' onClick={this.clickEventDetails}>
+            <Card className='event event-details-outer-container'>
+                <Card.Title>{event.summary}</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">Location: {event.location}</Card.Subtitle>
+                <Card.Text>
+                    {event.description}
+                </Card.Text>
+                <Button  onClick={this.clickEventDetails} size="sm" style={{width: '20%'}}>
                     <span className={showDetails ? 'show-details-btn' : 'show-details-btn visible'}> show details </span>
                     <span className={showDetails ? 'hide-details-btn visible' : 'show-details-btn'}> hide details </span>
-                </button>
+                </Button>
                 <div className={showDetails ? 'event-details-inner-container visible' : 'event-details-inner-container'}>
                     <p className='event-start'>From: {event.start.dateTime}</p>
                     <p className='event-end'>Until: {event.end.dateTime}</p>
                 </div>
-            </div>
+            </Card>
         )
     }
 }

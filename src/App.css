@@ -4,16 +4,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 .App {
   text-align: center;
   padding: 2% 5%;
- 
+  margin: 0px;
+
+
 }
-
-
 
 ul {
   padding: 0;
@@ -42,10 +42,6 @@ input[type='number'] {
   align-self: center;
   height: 38px;
   width: 215px;
-}
-
-.city {
-  width: 250px;
 }
 
 .CitySearch {
@@ -93,7 +89,7 @@ input[type='number'] {
   position: relative;
 }
 
-.details-btn {
+/* .details-btn {
   position: absolute;
   right: 5px;
   bottom: 5px;
@@ -101,7 +97,7 @@ input[type='number'] {
   border-radius: 4px;
   outline: none;
   cursor: pointer;
-}
+} */
 
 .name {
   font-size: 18px;
@@ -152,6 +148,30 @@ input[type='number'] {
 }
 .recharts-surface {
   overflow: visible;
+}
+
+.hero-section {
+  display: flex;
+  
+  min-width: 100%;
+  min-height: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.hero-section-heading {
+  font-weight: bolder;
+  font-size: 50px
+}
+
+.right-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  z-index: -1;
+
 }
 
 .login-button {
@@ -211,7 +231,6 @@ input[type='number'] {
   border-radius: 5px;
   padding: 10px;
   margin: 10px;
-
 }
 
 @media only screen and (min-width: 992px) {
@@ -225,4 +244,3 @@ input[type='number'] {
     margin: 0 auto;
   }
 }
-

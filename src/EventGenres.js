@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Sector, Cell, ResponsiveContainer, Legend} from 'recharts';
 
 
 const EventGenre = ({ events }) => {
@@ -36,6 +36,7 @@ const EventGenre = ({ events }) => {
                         <Cell key={`cell-${index}`} fill={colors[index]} />
                     ))}
                 </Pie>
+                  <Legend verticalAlign="top" height={36}/>
             </PieChart>
         </ResponsiveContainer>
     )

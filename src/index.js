@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import * as atatus from 'atatus-spa';
 atatus.config('3b86111f8f304e988eaefe9a40ebfee4').install();
 
+
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(

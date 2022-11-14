@@ -1,8 +1,10 @@
 import {
   ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip,
+  legend,
   ResponsiveContainer
 } from 'recharts';
 import React, { Component } from 'react';
+import Menu from './menu'
 import EventGenre from './EventGenres';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
@@ -13,7 +15,9 @@ import { WarningAlert } from './Alerts';
 import WelcomeScreen from './WelcomeScreen';
 import './App.css';
 import './nprogress.css';
-import { GoLocation } from 'react-icons/go';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 
 class App extends Component {
   state = {
@@ -104,11 +108,6 @@ class App extends Component {
       return (
         <div className="App">
           <WarningAlert text={`You are currently offline. Please connect to the internet to see the full list of events.`} />
-          <h1> MeetUp
-            {/* Meet Logo */}
-            <GoLocation style={{ color: 'red' }} />
-
-          </h1>
           <h2> Find events near you </h2>
           <CitySearch locations={locations} updateEvents={this.updateEvents} />
           <NumberOfEvents totalEvents={totalEvents}
@@ -146,48 +145,52 @@ class App extends Component {
     }
     else {
       return (
-        <div className="App">
+        <>
+          <div className="App">
+            <Menu />
+            <div className='hero-section'>
+              <h2 className=
+                'hero-section-heading' > Find Events Near You  <br />& Meet Like-Minded Developers </h2>
+           <div className='right-content'>
+            <img src='https://img.freepik.com/free-vector/address-concept-illustration_114360-321.jpg?w=996&t=st=1668446637~exp=1668447237~hmac=3b2465e3f0a0e4057c5902f30e807aa2c847e21a78c4f7a4a2d78a0328afd3fa'/>
+           </div>
+            </div>
 
-          <h1> MeetUp
-            {/* Meet Logo */}
-            <GoLocation style={{ color: 'red' }} />
-          </h1>
-          <h2> Find events near you </h2>
-          <CitySearch locations={locations} updateEvents={this.updateEvents} />
-          <NumberOfEvents totalEvents={totalEvents}
-            handleInputChanged={this.handleInputChanged}
-            errorText={this.state.errorText}
-            warningText={this.state.warningText} />
+            <CitySearch locations={locations} updateEvents={this.updateEvents} />
+                <NumberOfEvents totalEvents={totalEvents}
+                  handleInputChanged={this.handleInputChanged}
+                  errorText={this.state.errorText}
+                  warningText={this.state.warningText} />
+            <div className='data-vis-wrapper'>
+              <EventGenre events={events} />
 
-          <div className='data-vis-wrapper'>
-            <EventGenre events={events} />
+              <ResponsiveContainer height={400} >
+                <ScatterChart
+                  className='recharts-surface'
+                  margin={{
+                    top: 20, right: 20, bottom: 20, left: 20,
+                  }}
+                >
+                  <CartesianGrid />
+                  <XAxis type="category" dataKey="city" name="city" />
+                  <YAxis type="number" dataKey="number" name="number of events" />
+                  <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                  <Scatter data={this.getData()} fill="#8884d8" />
+                </ScatterChart>
+              </ResponsiveContainer>
+            </div>
 
-            <ResponsiveContainer height={400} >
-              <ScatterChart
-                className='recharts-surface'
-                margin={{
-                  top: 20, right: 20, bottom: 20, left: 20,
-                }}
-              >
-                <CartesianGrid />
-                <XAxis type="category" dataKey="city" name="city" />
-                <YAxis type="number" dataKey="number" name="number of events" />
-                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                <Scatter data={this.getData()} fill="#8884d8" />
-              </ScatterChart>
-            </ResponsiveContainer>
-          </div>
-
-          <EventList events={events.slice(0, totalEvents)} />
-          <WelcomeScreen
+            <EventList events={events.slice(0, totalEvents)} />
+            {/* <WelcomeScreen
             showWelcomeScreen={this.state.showWelcomeScreen}
             getAccessToken={() => {
               getAccessToken();
             }}
           />
-          <EventList events={events.slice(0, totalEvents)} />
+         */}
 
-        </div>
+          </div>
+        </>
       );
     }
   }
