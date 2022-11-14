@@ -13,7 +13,6 @@ import { WarningAlert } from './Alerts';
 import WelcomeScreen from './WelcomeScreen';
 import './nprogress.css';
 import { GoLocation } from 'react-icons/go';
-import { IconContext } from 'react-icons';
 
 class App extends Component {
   state = {
@@ -119,7 +118,8 @@ class App extends Component {
 
           <h4>Events in each city</h4>
           <ResponsiveContainer height={400} >
-            <ScatterChart
+            <ScatterChart 
+            className='recharts-surface'
               margin={{
                 top: 20, right: 20, bottom: 20, left: 20,
               }}
@@ -176,7 +176,7 @@ class App extends Component {
               <Scatter data={this.getData()} fill="#8884d8" />
             </ScatterChart>
           </ResponsiveContainer>
-          
+
           <EventList events={events.slice(0, totalEvents)} />
           <WelcomeScreen
             showWelcomeScreen={this.state.showWelcomeScreen}
