@@ -6,14 +6,14 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+
 .App {
   text-align: center;
   padding: 2% 5%;
+ 
 }
 
-.App * {
-  box-sizing: border-box;
-}
+
 
 ul {
   padding: 0;
@@ -225,3 +225,4 @@ input[type='number'] {
     margin: 0 auto;
   }
 }
+

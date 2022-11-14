@@ -3,7 +3,7 @@ import {
   ResponsiveContainer
 } from 'recharts';
 import React, { Component } from 'react';
-import './App.css';
+import EventGenre from './EventGenres';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
@@ -11,6 +11,7 @@ import { mockData } from './mock-data';
 import { extractLocations, getEvents, getAccessToken, checkToken } from './api'
 import { WarningAlert } from './Alerts';
 import WelcomeScreen from './WelcomeScreen';
+import './App.css';
 import './nprogress.css';
 import { GoLocation } from 'react-icons/go';
 
@@ -115,23 +116,23 @@ class App extends Component {
             errorText={this.state.errorText}
             warningText={this.state.warningText} />
 
+          <div className='data-vis-wrapper'>
+            <EventGenre events={events} />
 
-          <h4>Events in each city</h4>
-          <ResponsiveContainer height={400} >
-            <ScatterChart 
-            className='recharts-surface'
-              margin={{
-                top: 20, right: 20, bottom: 20, left: 20,
-              }}
-            >
-              <CartesianGrid />
-              <XAxis type="category" dataKey="city" name="city" />
-              <YAxis type="number" dataKey="number" name="number of events" />
-              <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-              <Scatter data={this.getData()} fill="#8884d8" />
-            </ScatterChart>
-          </ResponsiveContainer>
-
+            <ResponsiveContainer height={400} >
+              <ScatterChart
+                margin={{
+                  top: 20, right: 20, bottom: 20, left: 20,
+                }}
+              >
+                <CartesianGrid />
+                <XAxis type="category" dataKey="city" name="city" />
+                <YAxis type="number" dataKey="number" name="number of events" />
+                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                <Scatter data={this.getData()} fill="#8884d8" />
+              </ScatterChart>
+            </ResponsiveContainer>
+          </div>
           <EventList events={events.slice(0, totalEvents)} />
           <WelcomeScreen
             showWelcomeScreen={this.state.showWelcomeScreen}
@@ -139,7 +140,6 @@ class App extends Component {
               getAccessToken();
             }}
           />
-
         </div>
 
       );
@@ -159,38 +159,34 @@ class App extends Component {
             errorText={this.state.errorText}
             warningText={this.state.warningText} />
 
+          <div className='data-vis-wrapper'>
+            <EventGenre events={events} />
 
-
-          <h4>Events in each city</h4>
-
-          <ResponsiveContainer height={400} >
-            <ScatterChart
-              margin={{
-                top: 20, right: 20, bottom: 20, left: 20,
-              }}
-            >
-              <CartesianGrid />
-              <XAxis type="category" dataKey="city" name="city" />
-              <YAxis type="number" dataKey="number" name="number of events" />
-              <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-              <Scatter data={this.getData()} fill="#8884d8" />
-            </ScatterChart>
-          </ResponsiveContainer>
+            <ResponsiveContainer height={400} >
+              <ScatterChart
+                className='recharts-surface'
+                margin={{
+                  top: 20, right: 20, bottom: 20, left: 20,
+                }}
+              >
+                <CartesianGrid />
+                <XAxis type="category" dataKey="city" name="city" />
+                <YAxis type="number" dataKey="number" name="number of events" />
+                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                <Scatter data={this.getData()} fill="#8884d8" />
+              </ScatterChart>
+            </ResponsiveContainer>
+          </div>
 
           <EventList events={events.slice(0, totalEvents)} />
-          <WelcomeScreen
+          {/* <WelcomeScreen
             showWelcomeScreen={this.state.showWelcomeScreen}
             getAccessToken={() => {
               getAccessToken();
             }}
-          />
+          /> */}
           <EventList events={events.slice(0, totalEvents)} />
-          <WelcomeScreen
-            showWelcomeScreen={this.state.showWelcomeScreen}
-            getAccessToken={() => {
-              getAccessToken();
-            }}
-          />
+
         </div>
       );
     }
