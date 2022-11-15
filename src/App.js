@@ -151,16 +151,19 @@ class App extends Component {
             <div className='hero-section'>
               <h2 className=
                 'hero-section-heading' > Find Events Near You  <br />& Meet Like-Minded Developers </h2>
-           <div className='right-content'>
-            <img src='https://img.freepik.com/free-vector/address-concept-illustration_114360-321.jpg?w=996&t=st=1668446637~exp=1668447237~hmac=3b2465e3f0a0e4057c5902f30e807aa2c847e21a78c4f7a4a2d78a0328afd3fa'/>
-           </div>
+              <div className='right-content'>
+                <img src='https://img.freepik.com/free-vector/current-location-concept-illustration_114360-4406.jpg?w=740&t=st=1668448894~exp=1668449494~hmac=04a5187a51471ebe7c164cce7825fe10cc7c5dfa6006369f33a1b09e5001328e'
+                  loading='lazy' />
+              </div>
             </div>
-
-            <CitySearch locations={locations} updateEvents={this.updateEvents} />
-                <NumberOfEvents totalEvents={totalEvents}
-                  handleInputChanged={this.handleInputChanged}
-                  errorText={this.state.errorText}
-                  warningText={this.state.warningText} />
+              <h3> Choose a city to see events </h3>
+            <div className='main-section'>
+              <CitySearch locations={locations} updateEvents={this.updateEvents} />
+              <NumberOfEvents totalEvents={totalEvents}
+                handleInputChanged={this.handleInputChanged}
+                errorText={this.state.errorText}
+                warningText={this.state.warningText} />
+            </div>
             <div className='data-vis-wrapper'>
               <EventGenre events={events} />
 
@@ -175,7 +178,7 @@ class App extends Component {
                   <XAxis type="category" dataKey="city" name="city" />
                   <YAxis type="number" dataKey="number" name="number of events" />
                   <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                  <Scatter data={this.getData()} fill="#8884d8" />
+                  <Scatter data={this.getData()} fill="#f77070" />
                 </ScatterChart>
               </ResponsiveContainer>
             </div>

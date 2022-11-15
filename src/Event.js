@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Event.css'
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import { Row, Col } from 'react-bootstrap';
 
 
 
@@ -21,21 +22,24 @@ export class Event extends Component {
         const { event } = this.props; // our event property
 
         return (
-            <Card className='event event-details-outer-container'>
-                <Card.Title>{event.summary}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">Location: {event.location}</Card.Subtitle>
-                <Card.Text>
-                    {event.description}
-                </Card.Text>
-                <Button  onClick={this.clickEventDetails} size="sm" style={{width: '20%'}}>
-                    <span className={showDetails ? 'show-details-btn' : 'show-details-btn visible'}> show details </span>
-                    <span className={showDetails ? 'hide-details-btn visible' : 'show-details-btn'}> hide details </span>
-                </Button>
-                <div className={showDetails ? 'event-details-inner-container visible' : 'event-details-inner-container'}>
-                    <p className='event-start'>From: {event.start.dateTime}</p>
-                    <p className='event-end'>Until: {event.end.dateTime}</p>
-                </div>
-            </Card>
+            <Row className='justify-space-around'>
+                <Col >
+                    <Card className='event event-details-outer-container text-center' >
+                        <Card.Title>{event.summary}</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">Location: {event.location}</Card.Subtitle>
+                        <Card.Text>
+                            {event.description}
+                        </Card.Text>
+                        <div onClick={this.clickEventDetails} size="sm" >
+                            {showDetails ? <Button variant="outline-primar" size="sm">Hide Details</Button> : <Button variant="outline-primary" size="sm">Show Details</Button>}
+                        </div>
+                        <div className={showDetails ? 'event-details-inner-container visible' : 'event-details-inner-container'}>
+                            <p className='event-start'>Start Date From: {event.start.dateTime}</p>
+                            <p className='event-end'>Until: {event.end.dateTime}</p>
+                        </div>
+                    </Card>
+                </Col>
+            </Row>
         )
     }
 }

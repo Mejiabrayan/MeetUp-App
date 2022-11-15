@@ -43,7 +43,6 @@ export class CitySearch extends Component {
         return (
             <div className='CitySearch'>
                 <InfoAlert text={this.state.infoText} />
-                <p>Search</p>
                 <input
                     placeholder='Search for city'
                     type='text'

@@ -10,8 +10,6 @@ class EventList extends Component {
 
             <ul className='EventList'>
                 {/* {console.log(events)} */}
-
-
                 {events.map(event =>
                     <li key={event.id}>
                         {/* Within the list elements there are event components */}

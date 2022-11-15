@@ -11,8 +11,6 @@
   text-align: center;
   padding: 2% 5%;
   margin: 0px;
-
-
 }
 
 ul {
@@ -152,16 +150,15 @@ input[type='number'] {
 
 .hero-section {
   display: flex;
-  
   min-width: 100%;
-  min-height: 100%;
+  min-height: 50%;
   justify-content: space-around;
   align-items: center;
 }
 
 .hero-section-heading {
   font-weight: bolder;
-  font-size: 50px
+  font-size: 50px;
 }
 
 .right-content {
@@ -171,7 +168,12 @@ input[type='number'] {
   align-items: center;
   width: 50%;
   z-index: -1;
+}
 
+.main-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .login-button {
@@ -217,21 +219,21 @@ input[type='number'] {
   width: 18px;
   height: 18px;
 }
-.btn-text {
+/* .btn-text {
   float: right;
   margin: 11px 11px 0 0;
   color: #fff;
   font-size: 14px;
   letter-spacing: 0.2px;
   font-family: 'Poppins', sans-serif;
-}
+} */
 
-.Event {
+/* .Event {
   border: rgba(133, 133, 133, 0.25) solid 1px;
   border-radius: 5px;
   padding: 10px;
   margin: 10px;
-}
+} */
 
 @media only screen and (min-width: 992px) {
   .data-vis-wrapper {
@@ -244,3 +246,23 @@ input[type='number'] {
     margin: 0 auto;
   }
 }
+@media (max-width: 400px) {
+  .hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 20px;
+    margin-top: 20px;
+
+  }
+  .hero-section-heading {
+    font-size: 30px;
+  }
+  .main-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px;
+  }
+  }
+

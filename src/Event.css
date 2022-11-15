@@ -1,9 +1,8 @@
-
 /* Hidden by Default */
 .show-details-btn,
-.hide-details-btn,
+.hide-details-btn ,
 .event-details-inner-container {
-  display: none;
+  display: none;  
 }
 
 /* Visible Class */
