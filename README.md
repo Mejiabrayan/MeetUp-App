@@ -1,6 +1,8 @@
 # MeetUp-App📍
 
-Meet and connect with people who share the same interest
+Find Events Near You & Connect With Like-Minded Developers With MeetUp App
+
+![Image](/src/images/meetup-img.png)
 
 ## Objectives
 
