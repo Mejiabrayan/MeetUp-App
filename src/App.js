@@ -4,6 +4,7 @@ import Menu from './components/Menu';
 import EventGenre from './EventGenres';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import { mockData } from './mock-data';
 import { extractLocations, getEvents, getAccessToken, checkToken } from './api'
@@ -14,7 +15,7 @@ import './nprogress.css';
 
 // Components Imports
 // import Container from './components/Container';
-import WelcomeScreen from './components/WelcomeScreen';
+
 import HeroSection from './components/HeroSection'
 import ResponsiveScatterChart from './components/ResponsiveScatterChart';
 
@@ -107,16 +108,10 @@ class App extends Component {
     // Checks if the user is online or offline
     if (!navigator.onLine) {
       return (
-
+<BrowserRouter>
         <div>
           <EventList events={events.slice(0, totalEvents)} />
-          <WelcomeScreen
-            className='WelcomeScreen'
-            showWelcomeScreen={this.state.showWelcomeScreen}
-            getAccessToken={() => {
-              getAccessToken();
-            }}
-          />
+      
           <WarningAlert text={`You are currently offline. Please connect to the internet to see the full list of events.`} />
           <h3 className="text-2xl font-bold my-4">Find events near you</h3>
 
@@ -130,10 +125,13 @@ class App extends Component {
           </div>
 
         </div>
+        </BrowserRouter>
 
       );
     } else {
       return (
+        <BrowserRouter> 
+
         <>
           <Menu />
           <div className='bg-primary text-secondary'>
@@ -168,15 +166,10 @@ class App extends Component {
               </div>
             </div>
 
-            <WelcomeScreen
-              className='WelcomeScreen'
-              showWelcomeScreen={this.state.showWelcomeScreen}
-              getAccessToken={() => {
-                getAccessToken();
-              }}
-            />
+         
           </div>
         </>
+        </BrowserRouter>
 
       );
 

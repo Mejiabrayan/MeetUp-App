@@ -10,12 +10,15 @@ export default function Menu() {
           <GoLocation className='mr-2 inline-block text-red-500' /> MeetUp App
         </Link>
         <div className='flex items-center'>
-          <a href='#home' className='text-lg font-medium text-black mr-4'>
+          <Link to={'/'} className='text-lg font-medium text-black mr-4'>
             Home
-          </a>
-          <a className='text-lg text-black mr-4'>About</a>
+          </Link>
+          <Link to={'/login'} className='items-center'>
+            Login
+          </Link>
         </div>
       </div>
     </nav>
   );
 }
+
