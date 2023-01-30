@@ -115,14 +115,15 @@ class App extends Component {
           <WarningAlert text={`You are currently offline. Please connect to the internet to see the full list of events.`} />
           <h3 className="text-2xl font-bold my-4">Find events near you</h3>
 
-          <div className='data-vis-wrapper flex justify-center'>
-            <div className='w-full sm:w-3/4 lg:w-1/2 xl:w-1/3'>
-              <EventGenre events={events} />
+          <div className='data-vis-wrapper justify-center flex flex-col items-center'>
+              <div className='w-full sm:w-3/4 lg:w-1/2 xl:w-1/3'>
+                <h2 className='text-2xl font-bold my-4  text-secondary text-center'>Find events near you</h2>
 
-              <ResponsiveScatterChart data={this.getData()} height={400} />
+                <EventGenre events={events} />
+                <ResponsiveScatterChart data={this.getData()} height={400} />
 
+              </div>
             </div>
-          </div>
 
         </div>
         </BrowserRouter>
@@ -137,7 +138,7 @@ class App extends Component {
           <div className='bg-primary text-secondary'>
             <HeroSection />
             <div className='inputs items-center'>
-              <h3 className='text-2xl text-center my-8 font-bold'>Choose a City to See Events
+              <h3 className='text-2xl text-center my-8 font-bold'>
 
 
               </h3>
@@ -156,7 +157,7 @@ class App extends Component {
             <EventList events={events.slice(0, totalEvents)} />
 
 
-            <div className='data-vis-wrapper'>
+            <div className='data-vis-wrapper justify-center flex flex-col items-center'>
               <div className='w-full sm:w-3/4 lg:w-1/2 xl:w-1/3'>
                 <h2 className='text-2xl font-bold my-4  text-secondary text-center'>Find events near you</h2>
 

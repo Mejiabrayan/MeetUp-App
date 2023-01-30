@@ -58,7 +58,7 @@ const CitySearch = ({ locations, updateEvents }) => {
                     transform: 'translateX(-50%)'
                 }}
             >
-                <ul className='max-h-56 rounded-md overflow-auto py-1 text-base leading-6 font-medium text-gray-700 bg-white shadow-xs'>
+                <ul className='max-h-20 rounded-md overflow-auto py-1 text-base leading-6 font-medium text-gray-700 bg-white shadow-xs'>
                     {suggestions
 
                         .map((suggestion, index) => (
