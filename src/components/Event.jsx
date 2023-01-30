@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import moment from 'moment';
 
 export class Event extends Component {
   constructor(props) {
@@ -16,6 +16,9 @@ export class Event extends Component {
   render() {
     const { showDetails } = this.state;
     const { event } = this.props;
+
+    const startDate = moment(event.start.dateTime).format('MMMM Do YYYY, h:mm a');
+    const endDate = moment(event.end.dateTime).format('MMMM Do YYYY, h:mm a');
 
     return (
       <div className='flex flex-wrap justify-center items-center'>
@@ -40,10 +43,10 @@ export class Event extends Component {
                 }
               >
                 <p className='event-start mt-2 text-sm '>
-                  Start Date From: {event.start.dateTime}
+                  Start Date From: {startDate}
                 </p>
                 <p className='event-end mt-2 text-sm '>
-                  Until: {event.end.dateTime}
+                  Until: {endDate}
                 </p>
               </div>
             </div>
@@ -51,8 +54,6 @@ export class Event extends Component {
         </div>
       </div>
     );
-    
-
   }
 }
 

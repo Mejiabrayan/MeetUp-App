@@ -1,11 +1,19 @@
 import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
+import { useHistory } from 'react-router-dom';
 
+import '../styles/welcome-screen.module.css';
 
+function LoginForm(props) {
+  const history = useHistory();
 
-function WelcomeScreen(props) {
-  return props.showWelcomeScreen ? (
-    <div className=' bg-primary h-screen flex items-center justify-center'>
+  const handleLogin = () => {
+    props.getAccessToken();
+    history.push('/');
+  };
+
+  return (
+    <div className='bg-primary h-screen flex items-center justify-center'>
       <div className='w-full max-w-xs mx-auto'>
         <div className='bg-white rounded-lg shadow-xl overflow-hidden'>
           <img
@@ -23,9 +31,7 @@ function WelcomeScreen(props) {
             </h2>
             <div className='mt-4'>
               <button
-                onClick={() => {
-                  props.getAccessToken();
-                }}
+                onClick={handleLogin}
                 className='w-full bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
               >
                 <FcGoogle className='mr-2' alt='Google sign-in' /> Sign in with
@@ -45,7 +51,7 @@ function WelcomeScreen(props) {
         </div>
       </div>
     </div>
-  ) : null;
+  );
 }
 
-export default WelcomeScreen;
+export default LoginForm;

@@ -50,20 +50,26 @@ const CitySearch = ({ locations, updateEvents }) => {
                 />
             </div>
             <div
-                className='absolute rounded-md shadow-lg z-10'
-                style={showSuggestions ? {} : { display: 'none' }}
+                className='absolute rounded-md shadow-lg z-10 text-center'
+                style={{
+                    display: showSuggestions ? 'block' : 'none',
+                    width: '100%',
+                    left: '50%',
+                    transform: 'translateX(-50%)'
+                }}
             >
                 <ul className='max-h-56 rounded-md overflow-auto py-1 text-base leading-6 font-medium text-gray-700 bg-white shadow-xs'>
-                    {suggestions.map((suggestion) => (
-                        <li
-                            key={suggestion}
-                            onClick={() => handleItemClicked(suggestion)}
+                    {suggestions
 
-                            className='cursor-pointer hover:bg-gray-100 py-2 px-4'
-                        >
-                            {suggestion}
-                        </li>
-                    ))}
+                        .map((suggestion, index) => (
+                            <li
+                                key={index}
+                                className='cursor-pointer hover:bg-gray-50 px-4 py-2 text-sm leading-5 shadow-sm text-gray-700 '
+                                onClick={() => handleItemClicked(suggestion)}
+                            >
+                                {suggestion}
+                            </li>
+                        ))}
                 </ul>
             </div>
         </div>
@@ -71,4 +77,3 @@ const CitySearch = ({ locations, updateEvents }) => {
 };
 
 export default CitySearch;
-
