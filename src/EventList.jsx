@@ -22,5 +22,5 @@ export default function EventList({ events }) {
       )}
     </div>
   );
-
 }
+

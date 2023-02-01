@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ErrorAlert, WarningAlert } from './Alerts';
+import { ErrorAlert, WarningAlert } from '../Alerts';
 
 // The code is a component that displays the number of events in an input field.
 class NumberOfEvents extends Component {

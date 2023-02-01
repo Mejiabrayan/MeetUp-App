@@ -21,7 +21,8 @@ export class Event extends Component {
     const endDate = moment(event.end.dateTime).format('MMMM Do YYYY, h:mm a');
 
     return (
-      <div className='flex flex-wrap justify-center items-center'>
+      <div className='flex  flex-wrap justify-center items-center'>
+        
         <div className='w-full max-w-md m-2'>
           <div className='rounded-md shadow-md'>
             <div className='p-4'>

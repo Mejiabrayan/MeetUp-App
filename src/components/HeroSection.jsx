@@ -8,13 +8,13 @@ export default function HeroSection() {
           <h2 className='text-4xl font-bold text-black my-8'>
             <span className='text-red-500'>Find Events </span> <br />{' '}
             <span className='text-red-500'>Near You</span>{' '}
-            <span className='bg-gradient-to-r text-red-500 text-black'>
+            <span className='bg-gradient-to-r text-red-500'>
               &
             </span>{' '}
             Meet Like-Minded Developers
           </h2>
           <button className='bg-red-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>
-            Start Now
+           Join Now
           </button>
         </div>
         <div className='w-1/2 md:w-2/3'>

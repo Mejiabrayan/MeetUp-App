@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import Menu from './components/Menu';
 import EventGenre from './EventGenres';
 import EventList from './EventList';
-import CitySearch from './CitySearch';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import CitySearch from './components/CitySearch';
+import { Route, Router, Switch } from 'react-router-dom';
 
 import { mockData } from './mock-data';
 import { extractLocations, getEvents, getAccessToken, checkToken } from './api'
@@ -13,12 +13,8 @@ import './App.css';
 import './index.css'
 import './nprogress.css';
 
-// Components Imports
-// import Container from './components/Container';
-
 import HeroSection from './components/HeroSection'
 import ResponsiveScatterChart from './components/ResponsiveScatterChart';
-
 
 
 class App extends Component {
@@ -102,79 +98,34 @@ class App extends Component {
   }
   render() {
     const { events, locations, totalEvents } = this.state;
-
-    if (this.state.showWelcomeScreen === undefined) return <div className="App" />
-
-    // Checks if the user is online or offline
-    if (!navigator.onLine) {
-      return (
-<BrowserRouter>
-        <div>
-          <EventList events={events.slice(0, totalEvents)} />
-      
-          <WarningAlert text={`You are currently offline. Please connect to the internet to see the full list of events.`} />
-          <h3 className="text-2xl font-bold my-4">Find events near you</h3>
-
-          <div className='data-vis-wrapper justify-center flex flex-col items-center'>
-              <div className='w-full sm:w-3/4 lg:w-1/2 xl:w-1/3'>
-                <h2 className='text-2xl font-bold my-4  text-secondary text-center'>Find events near you</h2>
-
-                <EventGenre events={events} />
-                <ResponsiveScatterChart data={this.getData()} height={400} />
-
-              </div>
-            </div>
-
-        </div>
-        </BrowserRouter>
-
-      );
-    } else {
-      return (
-        <BrowserRouter> 
-
+    return (
         <>
           <Menu />
+         
+         
           <div className='bg-primary text-secondary'>
             <HeroSection />
-            <div className='inputs items-center'>
-              <h3 className='text-2xl text-center my-8 font-bold'>
-
-
-              </h3>
-
-              <div className='container mx-auto py-8'>
-                <div className='relative rounded-md shadow-sm'>
-                  <CitySearch
-                    className='form-input '
-                    locations={locations}
-                    updateEvents={this.updateEvents}
-                  />
-                </div>
-
-              </div>
+            <div className="container mx-auto py-4">
+             
+              <CitySearch locations={locations} onInputChanged={this.handleInputChanged} updateEvents={this.updateEvents} />
+              <EventList events={events.slice(0, totalEvents)} />
             </div>
-            <EventList events={events.slice(0, totalEvents)} />
-
-
-            <div className='data-vis-wrapper justify-center flex flex-col items-center'>
-              <div className='w-full sm:w-3/4 lg:w-1/2 xl:w-1/3'>
-                <h2 className='text-2xl font-bold my-4  text-secondary text-center'>Find events near you</h2>
-
-                <EventGenre events={events} />
-                <ResponsiveScatterChart data={this.getData()} height={400} />
-
-              </div>
+    
+          <div className='data-vis-wrapper justify-center flex flex-col items-center'>
+            <div className='w-full sm:w-3/4 lg:w-1/2 xl:w-1/3'>
+              <h2 className='text-2xl font-bold my-4  text-secondary text-center'>Find events near you</h2>
+    
+              <EventGenre events={events} />
+              <ResponsiveScatterChart data={this.getData()} height={400} />
+    
             </div>
-
-         
+          </div>
           </div>
         </>
-        </BrowserRouter>
+         
 
-      );
+    );
 
-    }
   }
 }
 
